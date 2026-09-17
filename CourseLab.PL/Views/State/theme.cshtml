@@ -1,0 +1,40 @@
+﻿@model string
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/theme.css" />
+    <link rel="stylesheet" href="~/css/theme-page.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+}
+
+<div class="container theme-selection-page mt-5">
+    <div class="card theme-card shadow">
+        <div class="card-body">
+            <h2 class="theme-title">Choose Your Theme</h2>
+            <form asp-action="SetTheme" method="post">
+                <div class="mb-3">
+                    <label class="form-label theme-label">
+                        Select Theme
+                    </label>
+
+                    <select name="theme" class="form-select theme-select">
+                        <option value="White" selected="@(Model == "White")">White Mode</option>
+                        <option value="Black" selected="@(Model == "Black")">Black Mode</option>
+                    </select>
+
+                </div>
+
+                <button type="submit" class="btn-primary-custom">
+                    Save Theme
+                </button>
+
+            </form>
+
+            <div class="theme-alert alert mt-4">
+                Current Theme: <strong>@Model</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

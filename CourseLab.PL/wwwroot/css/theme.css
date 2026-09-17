@@ -1,0 +1,82 @@
+﻿body.white {
+    background-color: #f5f6fa;
+    color: #212529;
+}
+
+    body.white .navbar {
+        background-color: #ffffff !important;
+        border-color: #dee2e6 !important;
+    }
+
+    body.white .navbar-brand {
+        color: #212529 !important;
+    }
+
+    body.white .nav-link {
+        color: #495057 !important;
+    }
+
+        body.white .nav-link:hover {
+            color: #0d6efd !important;
+        }
+
+    body.white .employee-card {
+        background-color: #ffffff;
+        border: 1px solid #e2e5e9;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+
+
+
+body.black {
+    background-color: #0f1117;
+    color: #e5e7eb;
+}
+
+    body.black .navbar {
+        background-color: #181b23 !important;
+        border-color: #292d38 !important;
+    }
+
+    body.black .navbar-brand {
+        color: #ffffff !important;
+    }
+
+    body.black .nav-link {
+        color: #cbd5e1 !important;
+    }
+
+        body.black .nav-link:hover {
+            color: #ffffff !important;
+        }
+
+    body.black .navbar-toggler {
+        background-color: #ffffff;
+    }
+
+
+
+
+body.white .footer {
+    background-color: #ffffff;
+    color: #6c757d;
+}
+
+    body.white .footer a {
+        color: #0d6efd;
+    }
+
+body.black .footer {
+    background-color: #181b23;
+    color: #9ca3af !important;
+    border-color: #292d38 !important;
+}
+
+    body.black .footer a {
+        color: #cbd5e1 !important;
+    }
+
+    body.black .footer.text-muted {
+        color: #9ca3af !important;
+    }

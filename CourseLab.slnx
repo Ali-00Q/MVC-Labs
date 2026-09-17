@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CourseLab.BLL/CourseLab.BLL.csproj" />
+  <Project Path="CourseLab.DAL/CourseLab.DAL.csproj" />
+  <Project Path="CourseLab.PL/CourseLab.PL.csproj" />
+</Solution>

@@ -1,0 +1,86 @@
+﻿@using CourseLab.BLL.ModelVM.EmployeeVM
+
+@model CreateEmployeeVM
+
+<div class="form-page">
+    <div class="form-card">
+
+        <!-- Header -->
+        <div class="form-header text-center">
+            <h1>Add Employee</h1>
+            <p>Enter the information for the new employee.</p>
+        </div>
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+
+        <!-- Employee Form -->
+        <form enctype="multipart/form-data" method="post" asp-action="SaveData" asp-controller="Employee">
+
+            <!-- MOVED INSIDE THE FORM: Profile Image Section -->
+            <div class="profile-image-section text-center">
+                <label for="employeeImage" class="profile-image-button">
+                    <img id="imgPreview" src="~/images/placeholder.png" alt="" />
+                </label>
+
+                <input asp-for="Image" type="file" id="employeeImage" accept="image/*" hidden />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <!-- Form Inputs -->
+            <div class="form-group-custom">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" type="text" class="form-control" placeholder="Enter employee name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group-custom">
+                <label asp-for="Age">Age</label>
+                <input asp-for="Age" type="number" class="form-control" placeholder="Enter employee age" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+
+            <div class="form-buttons">
+                <a asp-action="GetAll" asp-controller="Employee" class="btn-secondary-custom">
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn-primary-custom">
+                    Add Employee
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById("employeeImage").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    document.getElementById("imgPreview").src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/employee-forms.css" />
+    <link rel="stylesheet" href="~/css/authentication.css" />
+    <link rel="stylesheet" href="~/css/employee.css" />
+    <link rel="stylesheet" href="~/css/employee-details.css" />
+    <link rel="stylesheet" href="~/css/theme.css" />
+    <link rel="stylesheet" href="~/css/theme-page.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+}

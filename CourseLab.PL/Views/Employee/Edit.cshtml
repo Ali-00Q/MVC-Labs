@@ -1,0 +1,118 @@
+﻿@using CourseLab.BLL.ModelVM.EmployeeVM
+
+@model EditEmployeeVM
+
+<div class="form-page">
+
+    <div class="form-card">
+
+        <!-- Header -->
+        <div class="form-header text-center">
+            <h1>Edit Employee</h1>
+            <p>Update the employee information below.</p>
+        </div>
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+
+        <!-- Employee Form: Added enctype and method -->
+        <form enctype="multipart/form-data" method="post" asp-action="SaveEditData" asp-controller="Employee">
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Hidden field to keep track of the existing image path if they don't change it -->
+            <input type="hidden" asp-for="ImagePath" />
+
+            <!-- Profile Image Section -->
+            <div class="profile-image-section text-center">
+
+                <label for="employeeImage" class="profile-image-button">
+                    @if (!string.IsNullOrEmpty(Model.ImagePath))
+                    {
+                        <img id="imgPreview" src="@Model.ImagePath" alt="Employee Image" />
+                    }
+                    else
+                    {
+                        <div id="imgPreviewFallback" class="employee-avatar d-inline-flex align-items-center justify-content-center">
+                            @Model.Name.Substring(0, 1).ToUpper()
+                        </div>
+                        <img id="imgPreview" src="#" alt="Employee Image" style="display:none;" />
+                    }
+                </label>
+
+                <!-- Hidden file selector input mapped to your View Model's IFormFile property -->
+                <input asp-for="Image" type="file" id="employeeImage" accept="image/*" hidden />
+                <span asp-validation-for="Image" class="text-danger"></span>
+                <p class="image-hint">Tap photo to update</p>
+            </div>
+
+            <!-- Form Inputs -->
+            <div class="form-group-custom">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" type="text" class="form-control" placeholder="Enter employee name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group-custom">
+                <label asp-for="Age">Age</label>
+                <input asp-for="Age" type="number" class="form-control" placeholder="Enter employee age" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+
+            <div class="form-buttons">
+                <a asp-action="GetAll" asp-controller="Employee" class="btn-secondary-custom">
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn-primary-custom">
+                    Save Changes
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById("employeeImage").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const imgPreview = document.getElementById("imgPreview");
+                    const fallbackBox = document.getElementById("imgPreviewFallback");
+
+                    // Inject the chosen image data into the preview container
+                    imgPreview.src = e.target.result;
+                    imgPreview.style.display = "block";
+
+                    // Hide the text initial container if it exists on screen
+                    if (fallbackBox) {
+                        fallbackBox.style.display = "none";
+                    }
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/employee-forms.css" />
+    <link rel="stylesheet" href="~/css/authentication.css" />
+    <link rel="stylesheet" href="~/css/employee.css" />
+    <link rel="stylesheet" href="~/css/employee-details.css" />
+    <link rel="stylesheet" href="~/css/theme.css" />
+    <link rel="stylesheet" href="~/css/theme-page.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+}
